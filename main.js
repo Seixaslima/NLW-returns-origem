@@ -5,6 +5,10 @@ onScroll()
 function onScroll() {
   showNavOnScroll()
   showBacToTopButtonOnScroll()
+  activateMenuAtCurrentSection(home)
+  activateMenuAtCurrentSection(services)
+  activateMenuAtCurrentSection(about)
+  activateMenuAtCurrentSection(contact)
 }
 
 function showNavOnScroll() {
@@ -20,6 +24,24 @@ function showBacToTopButtonOnScroll() {
     backToTopButton.classList.add('show')
   } else {
     backToTopButton.classList.remove('show')
+  }
+}
+
+function activateMenuAtCurrentSection(section) {
+  const targgetLine = scrollY + innerHeight / 2
+
+  const sectionTop = section.offsetTop
+  const sectionHeight = section.offsetHeight
+  const sectionButton = sectionTop + sectionHeight
+  const sectionOnWindow =
+    sectionButton >= targgetLine && sectionTop < targgetLine
+
+  const sectionId = section.getAttribute('id')
+  const menuElement = document.querySelector(`.menu a[href*=${sectionId}]`)
+  if (sectionOnWindow) {
+    menuElement.classList.add('active')
+  } else {
+    menuElement.classList.remove('active')
   }
 }
 
